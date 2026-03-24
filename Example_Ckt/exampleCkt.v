@@ -1,5 +1,5 @@
 module example(A,B,C,D,E,F,Y);
-// Running Test
+// Running Test ......
   input A,B,C,D,E,F;
   output Y;
   wire t1, t2, t3, t4, Y;
