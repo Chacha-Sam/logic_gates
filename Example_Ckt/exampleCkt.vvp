@@ -1,0 +1,68 @@
+#! /c/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_011B85E8 .scope module, "testbench" "testbench" 2 2;
+ .timescale 0 0;
+v011BDBD0_0 .var "A", 0 0;
+v011BE150_0 .var "B", 0 0;
+v011BDF40_0 .var "C", 0 0;
+v011BDEE8_0 .var "D", 0 0;
+v011BE1A8_0 .var "E", 0 0;
+v011BE200_0 .var "F", 0 0;
+v011BDF98_0 .net "Y", 0 0, L_011BE4B8; 1 drivers
+S_011B8340 .scope module, "DUT" "example" 2 5, 3 1, S_011B85E8;
+ .timescale 0 0;
+L_011B9618/d .functor NOT 1, v011BE150_0, C4<0>, C4<0>, C4<0>;
+L_011B9618 .delay (1,1,1) L_011B9618/d;
+L_011B2C40/d .functor NAND 1, v011BDBD0_0, v011BE150_0, C4<1>, C4<1>;
+L_011B2C40 .delay (1,1,1) L_011B2C40/d;
+L_011B8C50/d .functor AND 1, v011BDF40_0, L_011B9618, v011BDEE8_0, C4<1>;
+L_011B8C50 .delay (1,1,1) L_011B8C50/d;
+L_011BE3E0/d .functor NOR 1, v011BE1A8_0, v011BE200_0, C4<0>, C4<0>;
+L_011BE3E0 .delay (1,1,1) L_011BE3E0/d;
+L_011BE4B8/d .functor NAND 1, L_011B2C40, L_011B8C50, L_011BE3E0, C4<1>;
+L_011BE4B8 .delay (1,1,1) L_011BE4B8/d;
+v011B3800_0 .net "A", 0 0, v011BDBD0_0; 1 drivers
+v011B9568_0 .net "B", 0 0, v011BE150_0; 1 drivers
+v011B95C0_0 .net "C", 0 0, v011BDF40_0; 1 drivers
+v011B3858_0 .net "D", 0 0, v011BDEE8_0; 1 drivers
+v011B38B0_0 .net "E", 0 0, v011BE1A8_0; 1 drivers
+v011B2B28_0 .net "F", 0 0, v011BE200_0; 1 drivers
+v011B2B80_0 .alias "Y", 0 0, v011BDF98_0;
+v011BDE90_0 .net "t1", 0 0, L_011B2C40; 1 drivers
+v011BDC80_0 .net "t2", 0 0, L_011B8C50; 1 drivers
+v011BE048_0 .net "t3", 0 0, L_011BE3E0; 1 drivers
+v011BDE38_0 .net "t4", 0 0, L_011B9618; 1 drivers
+    .scope S_011B85E8;
+T_0 ;
+    %vpi_call 2 7 "$dumpfile", "exampleCkt.vcd";
+    %vpi_call 2 8 "$dumpvars", 1'sb0, S_011B85E8;
+    %vpi_call 2 9 "$monitor", $time, "A=%b, B=%b, C=%b, D=%b, E=%b, F=%b, Y=%b", v011BDBD0_0, v011BE150_0, v011BDF40_0, v011BDEE8_0, v011BE1A8_0, v011BE200_0, v011BDF98_0;
+    %delay 5, 0;
+    %set/v v011BDBD0_0, 1, 1;
+    %set/v v011BE150_0, 0, 1;
+    %set/v v011BDF40_0, 0, 1;
+    %set/v v011BDEE8_0, 1, 1;
+    %set/v v011BE1A8_0, 0, 1;
+    %set/v v011BE200_0, 0, 1;
+    %delay 5, 0;
+    %set/v v011BDBD0_0, 0, 1;
+    %set/v v011BE150_0, 0, 1;
+    %set/v v011BDF40_0, 1, 1;
+    %set/v v011BDEE8_0, 1, 1;
+    %set/v v011BE1A8_0, 0, 1;
+    %set/v v011BE200_0, 0, 1;
+    %delay 5, 0;
+    %set/v v011BDBD0_0, 1, 1;
+    %set/v v011BDF40_0, 0, 1;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "exampleCkt_tb.v";
+    "./exampleCkt.v";
