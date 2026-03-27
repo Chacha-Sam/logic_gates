@@ -1,4 +1,5 @@
 module example(A,B,C,D,E,F,Y);
+// Writing Comment
   input A,B,C,D,E,F;
   output Y;
   wire t1, t2, t3, t4, Y;
